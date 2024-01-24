@@ -1,10 +1,10 @@
 export default class Ship {
   constructor(length, startCoordinates, isVertical) {
     this.length = length;
+    this.isVertical = isVertical || false;
     this.fullCoordinates = this.#getFullCoordinates(length, startCoordinates);
     this.hitCount = 0;
     this.sunken = false;
-    this.isVertical = isVertical || false;
   }
 
   #getFullCoordinates(length, coordinates, fullCoordinates = []) {
@@ -15,8 +15,10 @@ export default class Ship {
     length -= 1;
 
     if (this.isVertical) {
+      console.log('isVertical');
       return this.#getFullCoordinates(length, [x, y + 1], fullCoordinates);
     } else {
+      console.log('isHorizontal');
       return this.#getFullCoordinates(length, [x + 1, y], fullCoordinates);
     }
   }
