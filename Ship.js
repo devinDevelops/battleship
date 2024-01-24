@@ -1,8 +1,24 @@
 export default class Ship {
-  constructor(length) {
-    this.length = length || 1;
+  constructor(length, startCoordinates, isVertical) {
+    this.length = length;
+    this.fullCoordinates = this.#getFullCoordinates(length, startCoordinates);
     this.hitCount = 0;
     this.sunken = false;
+    this.isVertical = isVertical || false;
+  }
+
+  #getFullCoordinates(length, coordinates, fullCoordinates = []) {
+    if (fullCoordinates.length == this.length) return fullCoordinates;
+
+    const [x, y] = coordinates;
+    fullCoordinates.push(coordinates);
+    length -= 1;
+
+    if (this.isVertical) {
+      return this.#getFullCoordinates(length, [x, y + 1], fullCoordinates);
+    } else {
+      return this.#getFullCoordinates(length, [x + 1, y], fullCoordinates);
+    }
   }
 
   isSunk() {
@@ -10,6 +26,6 @@ export default class Ship {
   }
 
   hit() {
-    this.hitCount++;
+    return this.hitCount++;
   }
 }
