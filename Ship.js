@@ -15,10 +15,8 @@ export default class Ship {
     length -= 1;
 
     if (this.isVertical) {
-      console.log('isVertical');
       return this.#getFullCoordinates(length, [x, y + 1], fullCoordinates);
     } else {
-      console.log('isHorizontal');
       return this.#getFullCoordinates(length, [x + 1, y], fullCoordinates);
     }
   }
